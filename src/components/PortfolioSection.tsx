@@ -35,7 +35,7 @@ const projects: Project[] = [
     description: "WordPress real estate website with property listings, search, and CMS integration.",
     tags: ["WordPress", "Web Design", "Real Estate"],
     thumbnail: thumbBuilder,
-    link: "https://srigowralayabuilders.com",
+    link: "https://srigowralayabuilders.in/",
     ctaLabel: "Visit Website",
   },
   {
@@ -43,6 +43,7 @@ const projects: Project[] = [
     description: "UI/UX prototype for an industrial IoT monitoring dashboard with real-time analytics.",
     tags: ["UI/UX", "Figma", "IoT", "Dashboard"],
     thumbnail: thumbScaleInd,
+    link: "https://www.figma.com/proto/fgFs79HtwZjLDk3rse0qiA/iot?node-id=0-1&t=8sJP801Oh24lanca-1",
     ctaLabel: "View Prototype",
   },
   {
@@ -50,6 +51,7 @@ const projects: Project[] = [
     description: "24-hour design sprint creating a job portal concept for web and mobile platforms.",
     tags: ["Hackathon", "UI/UX", "Mobile", "Web"],
     thumbnail: thumbJobx,
+    link: "https://www.figma.com/proto/IWUjw9QUbZMjQsadstkKU7/Jobx?node-id=40-36&t=Edd0tmiIAjIgR3To-1",
     ctaLabel: "View Project",
   },
   {
@@ -64,6 +66,7 @@ const projects: Project[] = [
     description: "Digital publication design with modern editorial layouts and visual storytelling.",
     tags: ["Editorial", "Publication", "Design"],
     thumbnail: thumbNewsletter,
+    link: "https://drive.google.com/file/d/1rI76Z-BNKbjlGO3eNomfWT_uy793L6LG/view?usp=sharing",
     ctaLabel: "Preview Newsletter",
   },
 ];
@@ -141,12 +144,13 @@ const PortfolioSection = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="mb-12"
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-2">
           Featured <span className="text-primary">Projects</span>
         </h2>
-        <p className="text-muted-foreground max-w-lg mx-auto">
+        <div className="w-12 h-1 bg-primary rounded-full mb-4" />
+        <p className="text-muted-foreground max-w-lg">
           A selection of my work across multimedia design, branding, and interactive experiences.
         </p>
       </motion.div>
