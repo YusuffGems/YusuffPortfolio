@@ -1,20 +1,20 @@
 import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profileAvatar from "@/assets/profile-avatar.png";
 
 const tools = [
-  { name: "Ae", label: "After Effects" },
-  { name: "Bl", label: "Blender" },
-  { name: "U", label: "Unity" },
-  { name: "Flutter", label: "Flutter" },
-  { name: "Fb", label: "Firebase" },
-  { name: "Wp", label: "WordPress" },
-  { name: "Figma", label: "Figma" },
-  { name: "Ps", label: "Photoshop" },
-  { name: "Ai", label: "Illustrator" },
-  { name: "Xd", label: "Adobe XD" },
-  { name: "Pr", label: "Premiere Pro" },
-  { name: "Id", label: "InDesign" },
+  { name: "Ae", label: "After Effects", color: "text-[hsl(270,60%,65%)]" },
+  { name: "Bl", label: "Blender", color: "text-primary" },
+  { name: "U", label: "Unity", color: "text-foreground/70" },
+  { name: "Flutter", label: "Flutter", color: "text-[hsl(200,80%,55%)]", highlight: true },
+  { name: "Fb", label: "Firebase", color: "text-primary" },
+  { name: "Wp", label: "WordPress", color: "text-[hsl(200,60%,55%)]" },
+  { name: "Figma", label: "Figma", color: "text-[hsl(270,60%,65%)]", highlight: true },
+  { name: "Ps", label: "Photoshop", color: "text-[hsl(210,70%,60%)]" },
+  { name: "Ai", label: "Illustrator", color: "text-primary" },
+  { name: "Xd", label: "Adobe XD", color: "text-[hsl(320,60%,55%)]" },
+  { name: "Pr", label: "Premiere Pro", color: "text-[hsl(270,50%,60%)]" },
+  { name: "Id", label: "InDesign", color: "text-[hsl(340,60%,55%)]" },
 ];
 
 const HeroSection = () => (
@@ -103,7 +103,7 @@ const HeroSection = () => (
           {/* Profile image */}
           <div className="relative w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-primary/50 z-10">
             <img
-              src={profilePhoto}
+              src={profileAvatar}
               alt="D. Mohammed Yusuff"
               className="w-full h-full object-cover"
             />
@@ -113,7 +113,6 @@ const HeroSection = () => (
           {tools.map((tool, i) => {
             const angle = (i / tools.length) * Math.PI * 2 - Math.PI / 2;
             const r = typeof window !== "undefined" && window.innerWidth < 768 ? 160 : 220;
-            const isHighlight = tool.name === "Flutter" || tool.name === "Figma";
             return (
               <motion.div
                 key={tool.name}
@@ -129,10 +128,10 @@ const HeroSection = () => (
                 title={tool.label}
               >
                 <div
-                  className={`w-10 h-10 rounded-lg flex items-center justify-center text-xs font-heading font-semibold cursor-default transition-all duration-300 hover:scale-110 ${
-                    isHighlight
-                      ? "glass border-primary/50 text-primary"
-                      : "glass text-muted-foreground hover:text-primary"
+                  className={`w-10 h-10 rounded-lg flex items-center justify-center text-xs font-heading font-semibold cursor-default transition-all duration-300 hover:scale-110 glass ${
+                    tool.highlight
+                      ? `border-primary/50 ${tool.color}`
+                      : `${tool.color} hover:text-primary`
                   }`}
                 >
                   {tool.name}
