@@ -59,6 +59,7 @@ const projects: Project[] = [
     description: "Complete branding and print design for India's premier leather industry exhibition.",
     tags: ["Branding", "Print", "Exhibition"],
     thumbnail: thumbIilf,
+    link: "https://drive.google.com/file/d/1ZNq_bUrE-2q8BZZD25Shn93ZiBJDZmGk/view?usp=sharing",
     ctaLabel: "View Designs",
   },
   {

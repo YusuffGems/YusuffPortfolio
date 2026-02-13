@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin } from "lucide-react";
+import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -11,10 +12,18 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    // TODO: Connect to edge function with Resend
-    toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
-    setForm({ name: "", email: "", message: "" });
-    setSending(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: form,
+      });
+      if (error) throw error;
+      toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      toast({ title: "Failed to send", description: "Please try again or email me directly." });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -39,8 +48,9 @@ const ContactSection = () => {
           className="glass rounded-xl p-8"
         >
           <div className="flex flex-wrap gap-6 mb-8 text-sm text-muted-foreground">
-            <span className="flex items-center gap-2"><Mail size={16} className="text-primary" /> myusuff98@gmail.com</span>
-            <span className="flex items-center gap-2"><MapPin size={16} className="text-primary" /> India</span>
+            <a href="mailto:myusuff98@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors"><Mail size={16} className="text-primary" /> myusuff98@gmail.com</a>
+            <a href="tel:+918939736343" className="flex items-center gap-2 hover:text-primary transition-colors"><Phone size={16} className="text-primary" /> +91 8939736343</a>
+            <span className="flex items-center gap-2"><MapPin size={16} className="text-primary" /> Chennai, India</span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
