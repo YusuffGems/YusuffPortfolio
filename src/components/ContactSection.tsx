@@ -2,28 +2,18 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sending, setSending] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
-    try {
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
-        body: form,
-      });
-      if (error) throw error;
-      toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
-      setForm({ name: "", email: "", message: "" });
-    } catch {
-      toast({ title: "Failed to send", description: "Please try again or email me directly." });
-    } finally {
-      setSending(false);
-    }
+    const subject = encodeURIComponent(`Portfolio Contact: ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
+    window.open(`mailto:myusuff98@gmail.com?subject=${subject}&body=${body}`, "_blank");
+    toast({ title: "Opening email client!", description: "Your default email app will open with the message pre-filled." });
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
@@ -88,10 +78,9 @@ const ContactSection = () => {
             />
             <button
               type="submit"
-              disabled={sending}
-              className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-heading font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-heading font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
             >
-              <Send size={16} /> {sending ? "Sending..." : "Send Message"}
+              <Send size={16} /> Send Message
             </button>
           </form>
         </motion.div>
