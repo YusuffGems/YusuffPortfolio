@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Phone } from "lucide-react";
+import { Send, Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -47,9 +47,17 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="glass rounded-xl p-8"
         >
-          <div className="flex flex-wrap gap-6 mb-8 text-sm text-muted-foreground">
+          <div className="flex flex-wrap gap-4 md:gap-6 mb-8 text-sm text-muted-foreground">
             <a href="mailto:myusuff98@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors"><Mail size={16} className="text-primary" /> myusuff98@gmail.com</a>
             <a href="tel:+918939736343" className="flex items-center gap-2 hover:text-primary transition-colors"><Phone size={16} className="text-primary" /> +91 8939736343</a>
+            <a
+              href="https://wa.me/918939736343?text=Hi%20Mohammed%20Yusuff%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-green-500 transition-colors"
+            >
+              <MessageCircle size={16} className="text-green-500" /> WhatsApp
+            </a>
             <span className="flex items-center gap-2"><MapPin size={16} className="text-primary" /> Chennai, India</span>
           </div>
 

@@ -20,7 +20,7 @@ const tools = [
 const HeroSection = () => (
   <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
     <div className="container relative z-10">
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Left content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -93,15 +93,15 @@ const HeroSection = () => (
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative flex items-center justify-center"
+          className="relative flex items-center justify-center mt-8 lg:mt-0"
         >
           {/* Concentric circles */}
-          <div className="absolute w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border border-border/30" />
-          <div className="absolute w-[22rem] md:w-[26rem] lg:w-[30rem] h-[22rem] md:h-[26rem] lg:h-[30rem] rounded-full border border-border/20" />
-          <div className="absolute w-[28rem] md:w-[32rem] lg:w-[36rem] h-[28rem] md:h-[32rem] lg:h-[36rem] rounded-full border border-border/10" />
+          <div className="absolute w-52 h-52 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border border-border/30" />
+          <div className="absolute w-72 h-72 md:w-[26rem] md:h-[26rem] lg:w-[30rem] lg:h-[30rem] rounded-full border border-border/20" />
+          <div className="absolute w-[22rem] h-[22rem] md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem] rounded-full border border-border/10" />
 
           {/* Profile image */}
-          <div className="relative w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-primary/50 z-10">
+          <div className="relative w-40 h-40 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-primary/50 z-10">
             <img
               src={profileAvatar}
               alt="D. Mohammed Yusuff"
@@ -112,7 +112,7 @@ const HeroSection = () => (
           {/* Floating tool icons */}
           {tools.map((tool, i) => {
             const angle = (i / tools.length) * Math.PI * 2 - Math.PI / 2;
-            const r = typeof window !== "undefined" && window.innerWidth < 768 ? 160 : 220;
+            const r = typeof window !== "undefined" && window.innerWidth < 768 ? 120 : 220;
             return (
               <motion.div
                 key={tool.name}
