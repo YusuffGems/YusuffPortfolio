@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import profileAvatar from "@/assets/profile-avatar.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const tools = [
   { name: "Ae", label: "After Effects", color: "text-[hsl(270,60%,65%)]" },
@@ -17,7 +18,9 @@ const tools = [
   { name: "Id", label: "InDesign", color: "text-[hsl(340,60%,55%)]" },
 ];
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const { t } = useLanguage();
+  return (
   <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
     <div className="container relative z-10">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -33,7 +36,7 @@ const HeroSection = () => (
             transition={{ delay: 0.2 }}
             className="text-primary font-heading text-lg font-medium"
           >
-            Hey, I am
+            {t("hero.greeting")}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -49,7 +52,7 @@ const HeroSection = () => (
             transition={{ delay: 0.5 }}
             className="text-lg text-muted-foreground mb-2"
           >
-            <span className="text-primary font-semibold">Flutter Developer</span> · UI/UX Designer · E-commerce Specialist
+            <span className="text-primary font-semibold">{t("hero.role")}</span> {t("hero.roleSuffix")}
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -57,7 +60,7 @@ const HeroSection = () => (
             transition={{ delay: 0.6 }}
             className="text-muted-foreground max-w-lg mb-8 leading-relaxed"
           >
-            I am a UI/UX designer and e-commerce specialist from Chennai with experience in WordPress, digital marketing, product management, and multimedia design.
+            {t("hero.intro")}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -69,13 +72,13 @@ const HeroSection = () => (
               href="#projects"
               className="px-7 py-3 rounded-full bg-primary text-primary-foreground font-heading font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
             >
-              View Portfolio
+              {t("hero.viewPortfolio")}
             </a>
             <a
               href="#contact"
               className="px-7 py-3 rounded-full border border-primary text-primary font-heading font-semibold hover:bg-primary/10 transition-all duration-300"
             >
-              Contact Me
+              {t("hero.contactMe")}
             </a>
             <a
               href="https://www.linkedin.com/in/mohammed-yusuff-b7835923b"
@@ -143,6 +146,7 @@ const HeroSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default HeroSection;

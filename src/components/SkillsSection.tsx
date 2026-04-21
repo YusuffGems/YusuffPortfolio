@@ -1,38 +1,40 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const skillCategories = [
-  {
-    title: "Core Skills",
-    skills: [
-      "UI/UX Design", "Graphic Design", "Dashboard Design",
-      "Website UI Design", "Mobile App UI Design",
-      "Digital Marketing", "Social Media Creative Design",
-      "Photography", "Videography", "Product Photography",
-      "Prototyping & Wireframing",
-    ],
-  },
-  {
-    title: "E-commerce Skills",
-    skills: [
-      "Product Listing & Catalog Management",
-      "Customer Journey Optimization",
-      "WooCommerce / WordPress",
-      "SEO Basics",
-      "Email Campaigns",
-    ],
-  },
-  {
-    title: "Software & Tools",
-    skills: [
-      "Figma", "Adobe XD", "Photoshop", "Illustrator",
-      "InDesign", "Premiere Pro", "WordPress", "Flutter",
-      "Firebase", "Blender", "Unity", "Mailchimp",
-      "OBS Studio",
-    ],
-  },
-];
-
-const SkillsSection = () => (
+const SkillsSection = () => {
+  const { t } = useLanguage();
+  const skillCategories = [
+    {
+      title: t("skills.cat.core"),
+      skills: [
+        "UI/UX Design", "Graphic Design", "Dashboard Design",
+        "Website UI Design", "Mobile App UI Design",
+        "Digital Marketing", "Social Media Creative Design",
+        "Photography", "Videography", "Product Photography",
+        "Prototyping & Wireframing",
+      ],
+    },
+    {
+      title: t("skills.cat.ecom"),
+      skills: [
+        "Product Listing & Catalog Management",
+        "Customer Journey Optimization",
+        "WooCommerce / WordPress",
+        "SEO Basics",
+        "Email Campaigns",
+      ],
+    },
+    {
+      title: t("skills.cat.tools"),
+      skills: [
+        "Figma", "Adobe XD", "Photoshop", "Illustrator",
+        "InDesign", "Premiere Pro", "WordPress", "Flutter",
+        "Firebase", "Blender", "Unity", "Mailchimp",
+        "OBS Studio",
+      ],
+    },
+  ];
+  return (
   <section id="skills" className="py-24">
     <div className="container">
       <motion.div
@@ -42,7 +44,7 @@ const SkillsSection = () => (
         className="mb-12"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-2">
-          My <span className="text-primary">Skills</span>
+          {t("skills.title1")} <span className="text-primary">{t("skills.title2")}</span>
         </h2>
         <div className="w-12 h-1 bg-primary rounded-full" />
       </motion.div>
@@ -74,6 +76,7 @@ const SkillsSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default SkillsSection;
