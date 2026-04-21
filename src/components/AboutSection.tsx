@@ -11,8 +11,8 @@ const infoCards = [
   {
     icon: Building2,
     title: "Experience",
-    line1: "Multiple years in UI/UX, e-commerce operations, and digital marketing",
-    line2: "",
+    line1: "Assistant Manager – IT at Leather Sector Skill Council",
+    line2: "6.5+ years in IT, UI/UX, e-commerce operations & digital marketing",
   },
   {
     icon: Languages,
