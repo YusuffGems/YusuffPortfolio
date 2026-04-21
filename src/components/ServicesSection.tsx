@@ -6,14 +6,14 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
-  { icon: Palette, title: "UI/UX Design", desc: "User-centered interfaces with intuitive interactions and clean aesthetics." },
-  { icon: Globe, title: "Website Design", desc: "Responsive WordPress websites built for performance and conversion." },
-  { icon: ShoppingCart, title: "E-commerce Support", desc: "End-to-end e-commerce setup, product listing, and catalog management." },
-  { icon: Megaphone, title: "Digital Marketing", desc: "Creative campaigns and SEO strategies to grow your online presence." },
-  { icon: Smartphone, title: "Social Media Design", desc: "Eye-catching social media creatives that boost engagement." },
-  { icon: Camera, title: "Product Photography", desc: "Professional product shoots optimized for web and social media." },
-  { icon: Video, title: "Videography", desc: "Video production and editing for brands and digital platforms." },
-  { icon: Mail, title: "Email Campaigns", desc: "Newsletter design and email campaign creation with Mailchimp." },
+  { icon: Palette, key: "uiux" },
+  { icon: Globe, key: "web" },
+  { icon: ShoppingCart, key: "ecom" },
+  { icon: Megaphone, key: "dm" },
+  { icon: Smartphone, key: "sm" },
+  { icon: Camera, key: "photo" },
+  { icon: Video, key: "video" },
+  { icon: Mail, key: "email" },
 ];
 
 const ServicesSection = () => {
@@ -36,7 +36,7 @@ const ServicesSection = () => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {services.map((s, i) => (
           <motion.div
-            key={s.title}
+            key={s.key}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -47,8 +47,8 @@ const ServicesSection = () => {
             <div className="w-12 h-12 rounded-lg bg-primary/15 flex items-center justify-center mb-4 group-hover:bg-primary/25 transition-colors duration-300">
               <s.icon size={22} className="text-primary" />
             </div>
-            <h3 className="font-heading font-semibold mb-2">{s.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+            <h3 className="font-heading font-semibold mb-2">{t(`svc.${s.key}.title`)}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t(`svc.${s.key}.desc`)}</p>
           </motion.div>
         ))}
       </div>
