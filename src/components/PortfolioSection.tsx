@@ -10,70 +10,61 @@ import thumbIilf from "@/assets/thumb-iilf.jpg";
 import thumbNewsletter from "@/assets/thumb-newsletter.jpg";
 
 interface Project {
-  title: string;
-  description: string;
+  key: string;
   tags: string[];
   thumbnail?: string;
   video?: string;
   poster?: string;
   link?: string;
-  ctaLabel: string;
   isPortrait?: boolean;
 }
 
 const projects: Project[] = [
   {
-    title: "VR Immersive Learning Content",
-    description: "Interactive VR educational experience designed for immersive learning environments.",
+    key: "vr",
     tags: ["VR", "Unity", "3D", "Education"],
     video: "/videos/vr-content-project.mp4",
     poster: vrPoster,
-    ctaLabel: "Watch Demo",
     isPortrait: true,
   },
   {
-    title: "Sri Gowralaya Builders",
-    description: "WordPress real estate website with property listings, search, and CMS integration.",
+    key: "builder",
     tags: ["WordPress", "Web Design", "Real Estate"],
     thumbnail: thumbBuilder,
     link: "https://srigowralayabuilders.in/",
-    ctaLabel: "Visit Website",
   },
   {
-    title: "Scale Ind 4.0 – IoT Dashboard",
-    description: "UI/UX prototype for an industrial IoT monitoring dashboard with real-time analytics.",
+    key: "scale",
     tags: ["UI/UX", "Figma", "IoT", "Dashboard"],
     thumbnail: thumbScaleInd,
     link: "https://www.figma.com/proto/fgFs79HtwZjLDk3rse0qiA/iot?node-id=0-1&t=8sJP801Oh24lanca-1",
-    ctaLabel: "View Prototype",
   },
   {
-    title: "JobX – NSDC Hackathon",
-    description: "24-hour design sprint creating a job portal concept for web and mobile platforms.",
+    key: "jobx",
     tags: ["Hackathon", "UI/UX", "Mobile", "Web"],
     thumbnail: thumbJobx,
     link: "https://www.figma.com/proto/IWUjw9QUbZMjQsadstkKU7/Jobx?node-id=40-36&t=Edd0tmiIAjIgR3To-1",
-    ctaLabel: "View Project",
   },
   {
-    title: "IILF 39th India International Leather Fair",
-    description: "Complete branding and print design for India's premier leather industry exhibition.",
+    key: "iilf",
     tags: ["Branding", "Print", "Exhibition"],
     thumbnail: thumbIilf,
     link: "https://drive.google.com/file/d/1ZNq_bUrE-2q8BZZD25Shn93ZiBJDZmGk/view?usp=sharing",
-    ctaLabel: "View Designs",
   },
   {
-    title: "LSSC Newsletter",
-    description: "Digital publication design with modern editorial layouts and visual storytelling.",
+    key: "news",
     tags: ["Editorial", "Publication", "Design"],
     thumbnail: thumbNewsletter,
     link: "https://drive.google.com/file/d/1rI76Z-BNKbjlGO3eNomfWT_uy793L6LG/view?usp=sharing",
-    ctaLabel: "Preview Newsletter",
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const { t } = useLanguage();
+  const title = t(`proj.${project.key}.title`);
+  const description = t(`proj.${project.key}.desc`);
+  const ctaLabel = t(`proj.${project.key}.cta`);
+  return (
   <motion.div
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +90,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       ) : (
         <img
           src={project.thumbnail}
-          alt={project.title}
+          alt={title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
@@ -108,8 +99,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
     {/* Info */}
     <div className="p-5">
-      <h3 className="font-heading text-lg font-semibold mb-2">{project.title}</h3>
-      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{project.description}</p>
+      <h3 className="font-heading text-lg font-semibold mb-2">{title}</h3>
+      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{description}</p>
       <div className="flex flex-wrap gap-2 mb-4">
         {project.tags.map((tag) => (
           <span
@@ -127,17 +118,18 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm text-primary hover:opacity-80 transition-opacity font-heading font-medium"
         >
-          {project.ctaLabel} <ExternalLink size={14} />
+          {ctaLabel} <ExternalLink size={14} />
         </a>
       ) : (
         <span className="inline-flex items-center gap-2 text-sm text-primary font-heading font-medium">
           {project.video ? <Play size={14} /> : <ExternalLink size={14} />}
-          {project.ctaLabel}
+          {ctaLabel}
         </span>
       )}
     </div>
   </motion.div>
-);
+  );
+};
 
 const PortfolioSection = () => {
   const { t } = useLanguage();
@@ -161,7 +153,7 @@ const PortfolioSection = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
         {projects.map((project, i) => (
-          <ProjectCard key={project.title} project={project} index={i} />
+          <ProjectCard key={project.key} project={project} index={i} />
         ))}
       </div>
     </div>

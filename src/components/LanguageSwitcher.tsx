@@ -1,12 +1,6 @@
-import { Globe } from "lucide-react";
+import { Globe, Check } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { useLanguage, Lang } from "@/contexts/LanguageContext";
-
-const langs: { code: Lang; label: string; short: string }[] = [
-  { code: "en", label: "English", short: "EN" },
-  { code: "ta", label: "தமிழ்", short: "TA" },
-  { code: "hi", label: "हिंदी", short: "HI" },
-];
+import { useLanguage, LANG_META } from "@/contexts/LanguageContext";
 
 const LanguageSwitcher = () => {
   const { lang, setLang } = useLanguage();
@@ -21,7 +15,7 @@ const LanguageSwitcher = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const current = langs.find((l) => l.code === lang) ?? langs[0];
+  const current = LANG_META.find((l) => l.code === lang) ?? LANG_META[0];
 
   return (
     <div ref={ref} className="relative">
@@ -34,23 +28,31 @@ const LanguageSwitcher = () => {
         <span className="text-xs font-heading font-semibold">{current.short}</span>
       </button>
       {open && (
-        <div className="absolute right-0 mt-2 w-36 glass rounded-lg overflow-hidden border border-border shadow-lg z-50">
-          {langs.map((l) => (
-            <button
-              key={l.code}
-              onClick={() => {
-                setLang(l.code);
-                setOpen(false);
-              }}
-              className={`w-full text-left px-4 py-2 text-sm font-heading transition-colors ${
-                lang === l.code
-                  ? "text-primary bg-primary/10"
-                  : "text-foreground/80 hover:text-primary hover:bg-primary/5"
-              }`}
-            >
-              {l.label}
-            </button>
-          ))}
+        <div className="absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto glass rounded-lg border border-border shadow-lg z-50">
+          {LANG_META.map((l) => {
+            const active = lang === l.code;
+            return (
+              <button
+                key={l.code}
+                onClick={() => {
+                  setLang(l.code);
+                  setOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2 text-sm font-heading transition-colors flex items-center justify-between gap-2 ${
+                  active
+                    ? "text-primary bg-primary/10"
+                    : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                }`}
+                dir={l.rtl ? "rtl" : "ltr"}
+              >
+                <span className="flex items-center gap-2">
+                  <span className="text-xs opacity-60 font-mono w-8">{l.short}</span>
+                  <span>{l.label}</span>
+                </span>
+                {active && <Check size={14} />}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
