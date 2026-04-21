@@ -3,6 +3,7 @@ import {
   Palette, Globe, ShoppingCart, Megaphone,
   Smartphone, Camera, Video, Mail,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
   { icon: Palette, title: "UI/UX Design", desc: "User-centered interfaces with intuitive interactions and clean aesthetics." },
@@ -15,7 +16,9 @@ const services = [
   { icon: Mail, title: "Email Campaigns", desc: "Newsletter design and email campaign creation with Mailchimp." },
 ];
 
-const ServicesSection = () => (
+const ServicesSection = () => {
+  const { t } = useLanguage();
+  return (
   <section id="services" className="py-24">
     <div className="container">
       <motion.div
@@ -25,7 +28,7 @@ const ServicesSection = () => (
         className="mb-12"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-2">
-          My <span className="text-primary">Services</span>
+          {t("services.title1")} <span className="text-primary">{t("services.title2")}</span>
         </h2>
         <div className="w-12 h-1 bg-primary rounded-full" />
       </motion.div>
@@ -51,6 +54,7 @@ const ServicesSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default ServicesSection;

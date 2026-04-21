@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
-
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isDark, setIsDark] = useState(true);
+
+  const navLinks = [
+    { label: t("nav.home"), href: "#home" },
+    { label: t("nav.about"), href: "#about" },
+    { label: t("nav.skills"), href: "#skills" },
+    { label: t("nav.services"), href: "#services" },
+    { label: t("nav.portfolio"), href: "#projects" },
+    { label: t("nav.contact"), href: "#contact" },
+  ];
 
   useEffect(() => {
     const stored = localStorage.getItem("theme");
@@ -95,6 +98,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
+          <LanguageSwitcher />
           <button
             onClick={toggleTheme}
             className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all duration-300"
@@ -106,12 +110,13 @@ const Navbar = () => {
             href="#contact"
             className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-heading font-semibold text-sm hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
           >
-            Hire Me
+            {t("nav.hireMe")}
           </a>
         </div>
 
         {/* Mobile toggle */}
         <div className="lg:hidden flex items-center gap-2">
+          <LanguageSwitcher />
           <button
             onClick={toggleTheme}
             className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground/70 hover:text-primary transition-all"
@@ -157,7 +162,7 @@ const Navbar = () => {
                 className="mt-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-heading font-semibold text-sm text-center"
                 onClick={() => setIsOpen(false)}
               >
-                Hire Me
+                {t("nav.hireMe")}
               </a>
             </div>
           </motion.div>

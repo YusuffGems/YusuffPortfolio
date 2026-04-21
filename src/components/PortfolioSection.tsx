@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Play } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 import vrPoster from "@/assets/vr-content-poster.jpg";
 import thumbBuilder from "@/assets/thumb-builder.jpg";
@@ -138,7 +139,9 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   </motion.div>
 );
 
-const PortfolioSection = () => (
+const PortfolioSection = () => {
+  const { t } = useLanguage();
+  return (
   <section id="projects" className="py-24">
     <div className="container">
       <motion.div
@@ -148,11 +151,11 @@ const PortfolioSection = () => (
         className="mb-12"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-2">
-          Featured <span className="text-primary">Projects</span>
+          {t("portfolio.title1")} <span className="text-primary">{t("portfolio.title2")}</span>
         </h2>
         <div className="w-12 h-1 bg-primary rounded-full mb-4" />
         <p className="text-muted-foreground max-w-lg">
-          A selection of my work across multimedia design, branding, and interactive experiences.
+          {t("portfolio.subtitle")}
         </p>
       </motion.div>
 
@@ -163,6 +166,7 @@ const PortfolioSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default PortfolioSection;
